@@ -10,32 +10,30 @@ import CouponView from "./views/CouponView";
 import LastWinningsView from "./views/LastWinningsView";
 import PendingCouponsView from "./views/PendingCouponsView";
 import SendCouponView from "./views/SendCouponView";
-import AuthLoadingView from "./views/AuthLoadingView";
-import AuthView from "./views/AuthView";
-import AuthRegisterView from "./views/AuthRegisterView";
+import PreparingView from "./views/PreparingView";
 
-const AppStack = createStackNavigator({
-  CouponHistory: CouponHistoryView,
-  CouponMap: CouponMapView,
-  Coupon: CouponView,
-  LastWinnings: LastWinningsView,
-  PendingCoupons: PendingCouponsView,
-  SendCoupon: SendCouponView
-});
-const AuthStack = createStackNavigator({
-  SignIn: AuthView,
-  Register: AuthRegisterView
-});
+const AppStack = createStackNavigator(
+  {
+    CouponHistory: CouponHistoryView,
+    CouponMap: CouponMapView,
+    Coupon: CouponView,
+    LastWinnings: LastWinningsView,
+    PendingCoupons: PendingCouponsView,
+    SendCoupon: SendCouponView
+  },
+  {
+    initialRouteName: "CouponMap"
+  }
+);
 
 export default createAppContainer(
   createSwitchNavigator(
     {
-      AuthLoading: AuthLoadingView,
-      App: AppStack,
-      Auth: AuthStack
+      Preparing: PreparingView,
+      App: AppStack
     },
     {
-      initialRouteName: "AuthLoading"
+      initialRouteName: "Preparing"
     }
   )
 );

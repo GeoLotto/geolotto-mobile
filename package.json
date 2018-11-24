@@ -7,8 +7,10 @@
     "test": "jest"
   },
   "dependencies": {
+    "ethers": "^4.0.13",
     "react": "16.6.1",
     "react-native": "0.57.5",
+    "react-native-elements": "^0.19.1",
     "react-native-gesture-handler": "^1.0.9",
     "react-navigation": "^3.0.0"
   },

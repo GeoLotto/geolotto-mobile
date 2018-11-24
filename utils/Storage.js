@@ -1,11 +1,11 @@
 import { AsyncStorage } from "react-native";
 
 export default class Storage {
-  static async getSession() {
-    return this._get("SESSION");
+  static async getPrivateKey() {
+    return this._get("PRIVATEKEY");
   }
-  static async setSession(session) {
-    return this._set("SESSION", session);
+  static async setPrivateKey(privateKey) {
+    return this._set("PRIVATEKEY", privateKey);
   }
   static async _get(what) {
     try {
