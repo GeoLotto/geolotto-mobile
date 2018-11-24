@@ -16,13 +16,14 @@ export default class DebugInfo extends Component {
   }
   render() {
     const { wallet } = this.state;
-    alert(wallet);
+
     if (!wallet)
       return (
         <View>
           <Text>Loading</Text>
         </View>
       );
+
     return (
       <View>
         <Text>Address:</Text>
