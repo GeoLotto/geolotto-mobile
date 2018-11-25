@@ -28,9 +28,12 @@ export default class CouponListEntry extends Component {
             }}
           />
         </MapView>
-        <Text>{new Date(this.props.timestamp).toLocaleString("pl")}</Text>
-        <Text>{this.props.value.toFixed(2)} zł</Text>
-        <Text>{this.getCouponStateString()}</Text>
+        <Text> </Text>
+        <Text>
+          Data i godzina: {new Date(this.props.timestamp).toLocaleString("pl")}
+        </Text>
+        <Text>Zakład: {this.props.value.toFixed(2)} zł</Text>
+        <Text>Status: {this.getCouponStateString()}</Text>
       </Card>
     );
   }
