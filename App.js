@@ -91,7 +91,12 @@ const AppStack = createStackNavigator(
         };
       }
     },
-    SendCoupon: SendCouponView,
+    SendCoupon: {
+      screen: SendCouponView,
+      navigationOptions: ({ navigation }) => ({
+        headerTitle: "Nowy kupon"
+      })
+    },
     Coupon: CouponView
   },
   {
