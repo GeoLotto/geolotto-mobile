@@ -8,7 +8,10 @@ import CouponState from "../utils/CouponState";
 export default class CouponListEntry extends Component {
   render() {
     return (
-      <Card title={"Kupon #" + this.props.id}>
+      <Card
+        title={"Kupon #" + this.props.id}
+        containerStyle={{ backgroundColor: this.getCouponStateColor() }}
+      >
         <MapView
           initialRegion={{
             latitude: this.props.latitude,
@@ -50,5 +53,17 @@ export default class CouponListEntry extends Component {
         return "Nagroda odebrana";
     }
     return "Coś poszło nie tak / nieznany stan";
+  }
+
+  getCouponStateColor() {
+    switch (this.props.state) {
+      case CouponState.Lost:
+        return "#ffefef";
+      case CouponState.AwaitingClaim:
+        return "#ffffef";
+      case CouponState.Claimed:
+        return "#efffef";
+    }
+    return undefined;
   }
 }
