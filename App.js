@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Icon } from "react-native-elements";
 import {
   createSwitchNavigator,
   createStackNavigator,
@@ -18,10 +19,50 @@ const AppStack = createStackNavigator(
     Tabs: {
       screen: createBottomTabNavigator(
         {
-          CouponHistory: CouponHistoryView,
-          CouponMap: CouponMapView,
-          LastWinnings: LastWinningsView,
-          PendingCoupons: PendingCouponsView
+          CouponMap: {
+            screen: CouponMapView,
+            navigationOptions: () => ({
+              title: "Mapa",
+              tabBarIcon: opts => (
+                <Icon name="map" type="font-awesome" color={opts.tintColor} />
+              )
+            })
+          },
+          PendingCoupons: {
+            screen: PendingCouponsView,
+            navigationOptions: () => ({
+              title: "Moje kupony",
+              tabBarIcon: opts => (
+                <Icon
+                  name="ticket"
+                  type="font-awesome"
+                  color={opts.tintColor}
+                />
+              )
+            })
+          },
+          CouponHistory: {
+            screen: CouponHistoryView,
+            navigationOptions: () => ({
+              title: "Historia",
+              tabBarIcon: opts => (
+                <Icon
+                  name="history"
+                  type="font-awesome"
+                  color={opts.tintColor}
+                />
+              )
+            })
+          },
+          LastWinnings: {
+            screen: LastWinningsView,
+            navigationOptions: () => ({
+              title: "Ostatnie wygrane",
+              tabBarIcon: opts => (
+                <Icon name="money" type="font-awesome" color={opts.tintColor} />
+              )
+            })
+          }
         },
         { initialRouteName: "CouponMap" }
       ),
