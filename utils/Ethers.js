@@ -4,7 +4,7 @@ import { ethers } from "ethers";
 
 export default class Ethers {
   static getProvider() {
-    return ethers.getDefaultProvider();
+    return new ethers.providers.InfuraProvider("ropsten");
   }
   static async getWallet() {
     try {
