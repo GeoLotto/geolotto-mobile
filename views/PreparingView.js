@@ -11,10 +11,6 @@ export default class PreparingView extends Component {
     this.props.navigation.navigate("App");
   }
   render() {
-    return (
-      <View>
-        <Text>GeoLotto</Text>
-      </View>
-    );
+    return <View />;
   }
 }
