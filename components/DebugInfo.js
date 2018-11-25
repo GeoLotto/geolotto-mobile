@@ -38,7 +38,7 @@ export default class DebugInfo extends Component {
         <Card title="Ethereum balance">
           <Text>{ethers.utils.formatEther(balance)}</Text>
         </Card>
-        <Card title="Ethereum node">
+        <Card title="Ethereum network">
           <Text>{network.name}</Text>
         </Card>
       </View>
