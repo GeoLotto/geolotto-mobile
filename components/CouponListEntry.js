@@ -3,15 +3,16 @@ import { View, Text } from "react-native";
 import { Card } from "react-native-elements";
 
 import MapView from "react-native-maps";
+import CouponState from "../utils/CouponState";
 
 export default class CouponListEntry extends Component {
   render() {
     return (
-      <Card title="#1234">
+      <Card title={"Kupon #" + this.props.id}>
         <MapView
           initialRegion={{
-            latitude: 37.78825,
-            longitude: -122.4324,
+            latitude: this.props.latitude,
+            longitude: this.props.longtitude,
             latitudeDelta: 0.0922,
             longitudeDelta: 0.0421
           }}
@@ -22,17 +23,29 @@ export default class CouponListEntry extends Component {
         >
           <MapView.Marker
             coordinate={{
-              latitude: 37.78825,
-              longitude: -122.4324
+              latitude: this.props.latitude,
+              longitude: this.props.longtitude
             }}
           />
         </MapView>
-        <Text>{new Date().toLocaleString("pl")}</Text>
-        <Text>12.34 zł</Text>
-        <Text>
-          {this.props.state ? this.props.state : "Oczekuje na losowanie"}
-        </Text>
+        <Text>{new Date(this.props.timestamp).toLocaleString("pl")}</Text>
+        <Text>{this.props.value.toFixed(2)} zł</Text>
+        <Text>{this.getCouponStateString()}</Text>
       </Card>
     );
+  }
+
+  getCouponStateString() {
+    switch (this.props.state) {
+      case CouponState.Pending:
+        return "Oczekuje na losowanie";
+      case CouponState.Lost:
+        return "Przegrana";
+      case CouponState.AwaitingClaim:
+        return "Nagroda do odbioru";
+      case CouponState.Claimed:
+        return "Nagroda odebrana";
+    }
+    return "Coś poszło nie tak / nieznany stan";
   }
 }

@@ -7,7 +7,7 @@ export default class LastWinningsView extends Component {
   render() {
     return (
       <View>
-        <CouponList entries={[{}, {}]} />
+        <CouponList entries={[]} />
       </View>
     );
   }
