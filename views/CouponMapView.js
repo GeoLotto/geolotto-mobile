@@ -49,6 +49,8 @@ export default class CouponMapView extends Component {
             longitudeDelta: 0.01
           }}
           showsUserLocation={true}
+          scrollEnabled={false}
+          rotateEnabled={false}
           style={{ width: "100%", height: "100%" }}
         />
       </View>
