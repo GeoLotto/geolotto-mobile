@@ -85,7 +85,7 @@ const AppStack = createStackNavigator(
             "CouponMap" ? (
               <Button
                 title="Nowy kupon"
-                onPress={() => navigation.stacknavigation.push("SendCoupon")}
+                onPress={() => navigation.push("SendCoupon")}
               />
             ) : null
         };
