@@ -59,13 +59,15 @@ export default class SendCouponView extends Component {
             marginRight: "auto"
           }}
           title="Kup zakład"
-          onPress={() =>
-            Ethers.newCoupon(
+          onPress={async () => {
+            await Ethers.newCoupon(
               this.state.coords.longitude,
               this.state.coords.latitude,
               this.state.value
-            )
-          }
+            );
+            this.props.navigation.pop();
+            alert("Udało się!");
+          }}
           disabled={
             parseFloat(this.state.value) > parseFloat(this.state.balance) ||
             parseFloat(this.state.value) === 0

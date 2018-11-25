@@ -209,7 +209,6 @@ export default class Ethers {
   static async newCoupon(long, lat, value) {
     const wallet = this.getWallet();
     const contract = await this.getContract();
-    alert(long + " " + lat);
     try {
       await contract.addNewCoupon(parseInt(long * 1000), parseInt(lat * 1000), {
         value: ethers.utils.parseEther(value)
@@ -217,6 +216,5 @@ export default class Ethers {
     } catch (err) {
       alert(err);
     }
-    alert("success");
   }
 }
