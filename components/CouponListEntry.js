@@ -9,7 +9,7 @@ export default class CouponListEntry extends Component {
   render() {
     return (
       <Card
-        title={"Kupon #" + this.props.id}
+        title={"Zakład #" + this.props.id}
         containerStyle={{ backgroundColor: this.getCouponStateColor() }}
       >
         <MapView
