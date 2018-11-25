@@ -33,7 +33,7 @@ const AppStack = createStackNavigator(
           PendingCoupons: {
             screen: PendingCouponsView,
             navigationOptions: () => ({
-              title: "Moje kupony",
+              title: "Moje zakłady",
               tabBarIcon: opts => (
                 <Icon
                   name="ticket"
@@ -84,7 +84,7 @@ const AppStack = createStackNavigator(
             navigation.state.routes[navigation.state.index].routeName ===
             "CouponMap" ? (
               <Button
-                title="Nowy kupon"
+                title="Nowy zakład"
                 onPress={() => navigation.push("SendCoupon")}
               />
             ) : null
@@ -94,7 +94,7 @@ const AppStack = createStackNavigator(
     SendCoupon: {
       screen: SendCouponView,
       navigationOptions: ({ navigation }) => ({
-        headerTitle: "Nowy kupon"
+        headerTitle: "Nowy zakład"
       })
     },
     Coupon: CouponView
