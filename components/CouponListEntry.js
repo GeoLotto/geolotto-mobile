@@ -16,7 +16,17 @@ export default class CouponListEntry extends Component {
             longitudeDelta: 0.0421
           }}
           style={{ width: "100%", height: 200 }}
-        />
+          scrollEnabled={false}
+          rotateEnabled={false}
+          zoomEnabled={false}
+        >
+          <MapView.Marker
+            coordinate={{
+              latitude: 37.78825,
+              longitude: -122.4324
+            }}
+          />
+        </MapView>
         <Text>{new Date().toLocaleString("pl")}</Text>
         <Text>12.34 zł</Text>
         <Text>
