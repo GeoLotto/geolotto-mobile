@@ -9,17 +9,17 @@ export default class SendCouponView extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      wallet: null
+      wallet: null,
+      value: "0"
     };
   }
   async componentWillMount() {
     const wallet = await Ethers.getWallet();
-    const balance = await wallet.getBalance();
+    const balance = ethers.utils.formatEther(await wallet.getBalance());
     this.setState({ wallet, balance });
   }
   render() {
     const { wallet, balance } = this.state;
-
     if (!wallet)
       return (
         <View>
@@ -32,10 +32,14 @@ export default class SendCouponView extends Component {
           <Text>{wallet.address}</Text>
         </Card>
         <Card title="Ilość ETH w portfelu">
-          <Text>{ethers.utils.formatEther(balance)}</Text>
+          <Text>{balance}</Text>
         </Card>
         <Card title="Wartość zakładu">
-          <Input keyboardType={"decimal-pad"} />
+          <Input
+            value={this.state.value}
+            onChangeText={value => this.setState({ value })}
+            keyboardType={"decimal-pad"}
+          />
         </Card>
         <Button
           style={{
@@ -45,6 +49,11 @@ export default class SendCouponView extends Component {
             marginRight: "auto"
           }}
           title="Kup zakład"
+          onPress={() => Ethers.newCoupon(this.state.value)}
+          disabled={
+            parseFloat(this.state.value) > parseFloat(this.state.balance) ||
+            parseFloat(this.state.value) === 0
+          }
         />
       </View>
     );
