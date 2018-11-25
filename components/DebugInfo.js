@@ -1,7 +1,9 @@
 import React, { Component } from "react";
-import { View, Text } from "react-native";
+import { View, Text, ActivityIndicator } from "react-native";
 
 import Ethers from "../utils/Ethers";
+import { ethers } from "ethers";
+import { Card } from "react-native-elements";
 
 export default class DebugInfo extends Component {
   constructor(props) {
@@ -12,26 +14,33 @@ export default class DebugInfo extends Component {
   }
   async componentWillMount() {
     const wallet = await Ethers.getWallet();
-    this.setState({ wallet });
+    const balance = await wallet.getBalance();
+    const network = await wallet.provider.getNetwork();
+    this.setState({ wallet, balance, network });
   }
   render() {
-    const { wallet } = this.state;
+    const { wallet, balance, network } = this.state;
 
     if (!wallet)
       return (
         <View>
-          <Text>Loading</Text>
+          <ActivityIndicator />
         </View>
       );
-
     return (
       <View>
-        <Text>Address:</Text>
-        <Text>{wallet.address}</Text>
-        <Text>Private key:</Text>
-        <Text>{wallet.privateKey}</Text>
-        <Text>Provider:</Text>
-        <Text>{JSON.stringify(wallet.provider)}</Text>
+        <Card title="Ethereum address">
+          <Text>{wallet.address}</Text>
+        </Card>
+        <Card title="Ethereum privateKey">
+          <Text>{wallet.privateKey}</Text>
+        </Card>
+        <Card title="Ethereum balance">
+          <Text>{ethers.utils.formatEther(balance)}</Text>
+        </Card>
+        <Card title="Ethereum node">
+          <Text>{network.name}</Text>
+        </Card>
       </View>
     );
   }
