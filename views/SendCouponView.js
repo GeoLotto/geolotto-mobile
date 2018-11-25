@@ -10,13 +10,23 @@ export default class SendCouponView extends Component {
     super(props);
     this.state = {
       wallet: null,
-      value: "0"
+      value: "0",
+      coords: null
     };
   }
   async componentWillMount() {
+    navigator.geolocation.getCurrentPosition(position => {
+      this.setState({ coords: position.coords });
+    });
     const wallet = await Ethers.getWallet();
     const balance = ethers.utils.formatEther(await wallet.getBalance());
-    this.setState({ wallet, balance });
+    this.setState({
+      wallet,
+      balance
+    });
+  }
+  componentWillUnmount() {
+    navigator.geolocation.clearWatch(this.watchID);
   }
   render() {
     const { wallet, balance } = this.state;
@@ -49,7 +59,13 @@ export default class SendCouponView extends Component {
             marginRight: "auto"
           }}
           title="Kup zakład"
-          onPress={() => Ethers.newCoupon(this.state.value)}
+          onPress={() =>
+            Ethers.newCoupon(
+              this.state.coords.longitude,
+              this.state.coords.latitude,
+              this.state.value
+            )
+          }
           disabled={
             parseFloat(this.state.value) > parseFloat(this.state.balance) ||
             parseFloat(this.state.value) === 0

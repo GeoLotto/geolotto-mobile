@@ -16,10 +16,11 @@ export default class DebugInfo extends Component {
     const wallet = await Ethers.getWallet();
     const balance = await wallet.getBalance();
     const network = await wallet.provider.getNetwork();
-    this.setState({ wallet, balance, network });
+    const contractAddress = Ethers.getContractAddress();
+    this.setState({ wallet, balance, network, contractAddress });
   }
   render() {
-    const { wallet, balance, network } = this.state;
+    const { wallet, balance, network, contractAddress } = this.state;
 
     if (!wallet)
       return (
@@ -40,6 +41,9 @@ export default class DebugInfo extends Component {
         </Card>
         <Card title="Ethereum network">
           <Text>{network.name}</Text>
+        </Card>
+        <Card title="Contract">
+          <Text>{contractAddress}</Text>
         </Card>
       </View>
     );
