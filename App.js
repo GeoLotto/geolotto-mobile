@@ -67,15 +67,19 @@ const AppStack = createStackNavigator(
         },
         { initialRouteName: "CouponMap" }
       ),
-      navigationOptions: ({ navigation }) => ({
-        title: "GeoLotto",
-        headerRight: (
-          <Button
-            title="Nowy kupon"
-            onPress={() => navigation.push("SendCoupon")}
-          />
-        )
-      })
+      navigationOptions: ({ navigation }) => {
+        return {
+          title: "GeoLotto",
+          headerRight:
+            navigation.state.routes[navigation.state.index].routeName ===
+            "CouponMap" ? (
+              <Button
+                title="Nowy kupon"
+                onPress={() => navigation.stacknavigation.push("SendCoupon")}
+              />
+            ) : null
+        };
+      }
     },
     SendCoupon: SendCouponView,
     Coupon: CouponView
