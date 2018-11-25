@@ -13,6 +13,7 @@ import CouponView from "./views/CouponView";
 import LastWinningsView from "./views/LastWinningsView";
 import PendingCouponsView from "./views/PendingCouponsView";
 import SendCouponView from "./views/SendCouponView";
+import SettingsView from "./views/SettingsView";
 import PreparingView from "./views/PreparingView";
 
 const AppStack = createStackNavigator(
@@ -61,6 +62,15 @@ const AppStack = createStackNavigator(
               title: "Ostatnie wygrane",
               tabBarIcon: opts => (
                 <Icon name="money" type="font-awesome" color={opts.tintColor} />
+              )
+            })
+          },
+          Settings: {
+            screen: SettingsView,
+            navigationOptions: () => ({
+              title: "Ustawienia",
+              tabBarIcon: opts => (
+                <Icon name="cog" type="font-awesome" color={opts.tintColor} />
               )
             })
           }
