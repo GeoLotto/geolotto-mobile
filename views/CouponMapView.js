@@ -33,7 +33,6 @@ export default class CouponMapView extends Component {
     navigator.geolocation.clearWatch(this.watchID);
   }
   render() {
-    alert(JSON.stringify(this.state.coords));
     return (
       <View>
         <MapView

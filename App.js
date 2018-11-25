@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Text } from "react-native";
 import { Icon } from "react-native-elements";
 import {
   createSwitchNavigator,
@@ -66,7 +67,7 @@ const AppStack = createStackNavigator(
         },
         { initialRouteName: "CouponMap" }
       ),
-      navigationOptions: () => ({
+      navigationOptions: navigation => ({
         title: "GeoLotto"
       })
     },
