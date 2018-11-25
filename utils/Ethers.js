@@ -4,19 +4,10 @@ import { ethers } from "ethers";
 
 export default class Ethers {
   static getContractAddress() {
-    return "0x4e6A8CF1f3AF6f3B60F3a5Ba428BeE1BCDc3872b";
+    return "0x64997fedf656bb202cc985b75c4549996433098d";
   }
   static getContractAbi() {
     return [
-      {
-        constant: false,
-        inputs: [],
-        name: "endLottery",
-        outputs: [],
-        payable: false,
-        stateMutability: "nonpayable",
-        type: "function"
-      },
       {
         constant: false,
         inputs: [
@@ -43,7 +34,16 @@ export default class Ethers {
             type: "uint256"
           }
         ],
-        name: "requestReward",
+        name: "didWon",
+        outputs: [],
+        payable: false,
+        stateMutability: "nonpayable",
+        type: "function"
+      },
+      {
+        constant: false,
+        inputs: [],
+        name: "endLottery",
         outputs: [],
         payable: false,
         stateMutability: "nonpayable",
@@ -57,7 +57,7 @@ export default class Ethers {
             type: "uint256"
           }
         ],
-        name: "didWon",
+        name: "requestReward",
         outputs: [],
         payable: false,
         stateMutability: "nonpayable",
@@ -97,6 +97,18 @@ export default class Ethers {
         payable: false,
         stateMutability: "nonpayable",
         type: "constructor"
+      },
+      {
+        anonymous: false,
+        inputs: [
+          {
+            indexed: false,
+            name: "couponsNumber",
+            type: "uint256"
+          }
+        ],
+        name: "CouponsGetting",
+        type: "event"
       },
       {
         anonymous: false,
@@ -178,6 +190,92 @@ export default class Ethers {
         ],
         name: "Claimed",
         type: "event"
+      },
+      {
+        anonymous: false,
+        inputs: [
+          {
+            indexed: false,
+            name: "couponId",
+            type: "uint256"
+          },
+          {
+            indexed: false,
+            name: "looser",
+            type: "address"
+          }
+        ],
+        name: "Lost",
+        type: "event"
+      },
+      {
+        anonymous: false,
+        inputs: [
+          {
+            indexed: false,
+            name: "when",
+            type: "uint256"
+          }
+        ],
+        name: "LotteryFinished",
+        type: "event"
+      },
+      {
+        constant: true,
+        inputs: [
+          {
+            name: "",
+            type: "uint256"
+          }
+        ],
+        name: "coupons",
+        outputs: [
+          {
+            name: "longitude",
+            type: "uint256"
+          },
+          {
+            name: "latitude",
+            type: "uint256"
+          },
+          {
+            name: "emiter",
+            type: "address"
+          },
+          {
+            name: "value",
+            type: "uint256"
+          },
+          {
+            name: "timestamp",
+            type: "uint256"
+          },
+          {
+            name: "state",
+            type: "uint8"
+          },
+          {
+            name: "reward",
+            type: "uint256"
+          }
+        ],
+        payable: false,
+        stateMutability: "view",
+        type: "function"
+      },
+      {
+        constant: true,
+        inputs: [],
+        name: "getCouponsNumbers",
+        outputs: [
+          {
+            name: "",
+            type: "uint256"
+          }
+        ],
+        payable: false,
+        stateMutability: "view",
+        type: "function"
       }
     ];
   }
@@ -196,7 +294,9 @@ export default class Ethers {
       const key = await Storage.getPrivateKey();
       return new ethers.Wallet(key, this.getProvider());
     } catch (err) {
-      alert("Nie mozna bylo przywrocic walleta. Tworzymy nowy.");
+      alert(
+        "Nie udalo sie przywrocic walleta (nowa instalacja?). Tworzymy nowy."
+      );
       const wallet = ethers.Wallet.createRandom().connect(this.getProvider());
       try {
         await Storage.setPrivateKey(wallet.privateKey);
